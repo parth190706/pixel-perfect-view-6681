@@ -135,17 +135,23 @@ export function Whisper({ text, onGone }: { text: string; onGone: () => void }) 
   );
 }
 
-/** Ambient floating motes; used across scenes. */
+/** Ambient floating motes; generated after mount so SSR and client agree. */
 export function Motes({ count = 14, tone = "gold" }: { count?: number; tone?: "gold" | "silver" }) {
-  const seeds = useRef(
-    Array.from({ length: count }, () => ({
-      left: Math.random() * 100,
-      delay: Math.random() * 14,
-      dur: 16 + Math.random() * 14,
-      size: 3 + Math.random() * 5,
-      op: 0.35 + Math.random() * 0.45,
-    })),
-  ).current;
+  const [seeds, setSeeds] = useState<
+    Array<{ left: number; delay: number; dur: number; size: number; op: number }>
+  >([]);
+
+  useEffect(() => {
+    setSeeds(
+      Array.from({ length: count }, () => ({
+        left: Math.random() * 100,
+        delay: Math.random() * 14,
+        dur: 16 + Math.random() * 14,
+        size: 3 + Math.random() * 5,
+        op: 0.35 + Math.random() * 0.45,
+      })),
+    );
+  }, [count]);
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
