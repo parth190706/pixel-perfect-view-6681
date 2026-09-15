@@ -168,8 +168,52 @@ export function ChapterRoom({ onComplete, onDiscover }: Props) {
             : null}
         </button>
 
-        {/* floor */}
+        {/* layered scenery: garland, framed picture, side table with a small cake, rug */}
+        <div className="pointer-events-none absolute top-4 left-0 h-16 w-full">
+          <svg viewBox="0 0 390 70" className="w-full" preserveAspectRatio="none">
+            <path d="M-10 8 Q 195 62 400 6" fill="none" stroke="oklch(0.74 0.05 40)" strokeWidth="2" />
+            {Array.from({ length: 11 }).map((_, i) => {
+              const t = i / 10;
+              const x = -10 + t * 410;
+              const y = 8 + Math.sin(Math.PI * t) * 27;
+              const hues = ["oklch(0.87 0.07 14)", "oklch(0.86 0.06 300)", "oklch(0.9 0.08 88)", "oklch(0.87 0.05 235)"];
+              return (
+                <path
+                  key={i}
+                  d={`M${x - 9} ${y} L${x + 9} ${y} L${x} ${y + 22} Z`}
+                  fill={hues[i % hues.length]}
+                  opacity={0.9}
+                />
+              );
+            })}
+          </svg>
+        </div>
+
+        <div className="pointer-events-none absolute top-44 left-6 w-24 rotate-[-3deg]">
+          <div className="rounded-md border-[6px] border-[oklch(0.78_0.05_50)] bg-[oklch(0.96_0.03_80)] p-2">
+            <svg viewBox="0 0 60 46" className="w-full">
+              <circle cx="18" cy="16" r="7" fill="oklch(0.88 0.09 88)" />
+              <path d="M2 44l14-18 10 12 8-9 24 15z" fill="oklch(0.84 0.06 150)" />
+            </svg>
+          </div>
+        </div>
+
+        <div className="pointer-events-none absolute bottom-28 left-1/2 w-32 -translate-x-1/2">
+          <svg viewBox="0 0 120 90" className="w-full">
+            <rect x="46" y="34" width="28" height="16" rx="3" fill="oklch(0.93 0.04 30)" />
+            <rect x="46" y="28" width="28" height="8" rx="3" fill="oklch(0.89 0.06 20)" />
+            <rect x="58" y="16" width="4" height="12" rx="2" fill="oklch(0.96 0.03 60)" />
+            <ellipse cx="60" cy="13" rx="3.5" ry="6" fill="oklch(0.9 0.13 75)" opacity={alive > 0 ? 1 : 0.25} />
+            <rect x="14" y="50" width="92" height="8" rx="3" fill="oklch(0.76 0.06 45)" />
+            <rect x="22" y="58" width="7" height="30" fill="oklch(0.7 0.06 42)" />
+            <rect x="91" y="58" width="7" height="30" fill="oklch(0.7 0.06 42)" />
+          </svg>
+        </div>
+
+        {/* floor + rug */}
         <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,oklch(0.82_0.05_45),oklch(0.72_0.05_40))]" />
+        <div className="pointer-events-none absolute bottom-2 left-1/2 h-16 w-[78%] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse,oklch(0.88_0.05_300/.85),oklch(0.83_0.05_18/.7)_70%,transparent)]" />
+
 
         {/* the spark */}
         {sparkReady && !caught ? (
