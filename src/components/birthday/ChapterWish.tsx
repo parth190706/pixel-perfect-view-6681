@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactElement } from "react";
 import { Motes, Narration, RevealCard, Stage } from "./story";
 import { sfx } from "@/lib/birthday-audio";
 
