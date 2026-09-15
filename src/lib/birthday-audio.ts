@@ -100,11 +100,11 @@ function scheduleLoop() {
   if (step % 4 === 0) pad(now, bar * 4.4);
   const notes = 1 + Math.floor(Math.random() * 2);
   for (let i = 0; i < notes; i++) {
-    const semi = SCALE[Math.floor(Math.random() * SCALE.length)] + (Math.random() < 0.3 ? 12 : 0);
+    const semi = pick() + (Math.random() < 0.3 ? 12 : 0);
     tone(midiToFreq(semi), now + i * 0.7 + Math.random() * 0.3, 2.6, 0.075, "triangle", musicGain);
   }
   if (Math.random() < 0.4) {
-    const semi = SCALE[Math.floor(Math.random() * SCALE.length)] + 24;
+    const semi = pick() + 24;
     tone(midiToFreq(semi), now + 1.4, 1.8, 0.028, "sine", musicGain);
   }
   step++;
