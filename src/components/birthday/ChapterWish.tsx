@@ -27,7 +27,7 @@ const BLESSINGS: Record<string, string[]> = {
   ],
 };
 
-const ITEM_ART: Record<Item["id"], JSX.Element> = {
+const ITEM_ART: Record<Item["id"], ReactElement> = {
   star: (
     <svg viewBox="0 0 60 60" className="h-full w-full">
       <path
