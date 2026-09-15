@@ -17,18 +17,16 @@ export function Narration({
   const doneRef = useRef(false);
 
   const advance = useCallback(() => {
-    setI((prev) => {
-      if (prev + 1 >= lines.length) {
-        if (!doneRef.current) {
-          doneRef.current = true;
-          onDone?.();
-        }
-        return prev;
+    if (i + 1 >= lines.length) {
+      if (!doneRef.current) {
+        doneRef.current = true;
+        onDone?.();
       }
-      sfx("page");
-      return prev + 1;
-    });
-  }, [lines.length, onDone]);
+      return;
+    }
+    sfx("page");
+    setI(i + 1);
+  }, [i, lines.length, onDone]);
 
   useEffect(() => {
     const t = window.setTimeout(advance, hold);
