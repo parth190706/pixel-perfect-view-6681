@@ -18,6 +18,7 @@ const SCALE = [0, 2, 4, 7, 9, 12, 14, 16, 19]; // pentatonic
 const ROOT = 220; // A3
 
 const midiToFreq = (semi: number) => ROOT * Math.pow(2, semi / 12);
+const pick = () => SCALE[Math.floor(Math.random() * SCALE.length)] ?? 0;
 
 function ensure(): boolean {
   if (typeof window === "undefined") return false;
